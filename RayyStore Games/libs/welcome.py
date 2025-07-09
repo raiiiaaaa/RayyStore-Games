@@ -1,0 +1,15 @@
+''' PESAN MENU '''
+def welcome_message():
+    print("\n========== RAYYSTORE GAMES! ==========")
+    print('List Menu:')
+    print("1. Tampilkan Produk")
+    print("2. Tambah Produk")
+    print("3. Ubah Produk")
+    print("4. Hapus Produk")
+    print("5. Transaksi Penjualan")
+    print("6. Transaksi Pembelian")
+    print("7. Laporan Penjualan Harian")
+    print("8. Laporan Penjualan Mingguan")
+    print("9. Laporan Penjualan Bulanan")
+    print("0. Keluar")
+    print('==============================')
