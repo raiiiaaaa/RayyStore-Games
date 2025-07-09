@@ -1,9 +1,10 @@
 import datetime
 from fungsi_manajemen.fungsi_util import load_transaksi
 
+''' LAPORAN TRANSAKSI '''
 def laporan(tipe):
     transaksi = load_transaksi()
-    print(f"\n=== Laporan {tipe.capitalize()} ===")
+    print(f"\n========== Laporan {tipe.capitalize()} ========")
     hari_ini = datetime.datetime.now()
     for t in transaksi:
         tgl = datetime.datetime.strptime(t['tanggal'], '%Y-%m-%d')
