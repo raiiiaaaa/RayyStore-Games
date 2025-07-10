@@ -1,42 +1,40 @@
-import datetime
-from collections import deque
-from fungsi_manajemen.fungsi_util import *
+from libs.welcome import welcome_message
+from fungsi_manajemen.fungsi_produk import *
+from fungsi_manajemen.fungsi_transaksi import transaksi
+from laporan import laporan
 
-queue_transaksi = deque()
+''' MAIN PROGRAM '''
+def menu():
+    while True:  # REKURSI PERULANGAN WHILE
+        welcome_message()
+        pilih = input("Pilih menu: ")
 
-def transaksi(tipe):
-    global queue_transaksi
+        # VALIDASI INPUT PILIHAN MENU
+        if pilih == '1':
+            tampilkan_produk()
+        elif pilih == '2':
+            tambah_produk()
+        elif pilih == '3':
+            update_produk()
+        elif pilih == '4':
+            hapus_produk()
+        elif pilih == '5':
+            cari_produk()
+        elif pilih == '6':
+            transaksi('penjualan')
+        elif pilih == '7':
+            transaksi('pembelian')
+        elif pilih == '8':
+            laporan('harian')
+        elif pilih == '9':
+            laporan('mingguan')
+        elif pilih == '10':
+            laporan('bulanan')
+        elif pilih == '0':
+            print("Terima kasih!")
+            break   # JIKA INPUT EXIT, PERULANGAN BERHENTI
+        else:
+            print("Pilihan tidak valid.")   # JIKA INPUT TIDAK VALID, MENU PROGRAM BERULANG DARI AWAL
 
-    try:
-        while True:
-            produk = load_produk()  
-            transaksi = load_transaksi()
-            id_produk = input("Masukkan ID Produk: ")
-            jumlah = int(input("Jumlah: "))
-            for p in produk:
-                if p['id'] == id_produk:
-                    if tipe == 'penjualan' and int(p['stok']) < jumlah:
-                        print("Stok tidak mencukupi!")
-                        return
-                    # Update stok
-                    if tipe == 'penjualan':
-                        p['stok'] = str(int(p['stok']) - jumlah)
-                    elif tipe == 'pembelian':
-                        p['stok'] = str(int(p['stok']) + jumlah)
-
-                    total = int(p['harga']) * jumlah
-                    waktu = datetime.datetime.now().strftime('%Y-%m-%d')
-                    id_trans = f"T{len(transaksi) + 1:04d}"
-
-                    transaksi.append({'id_transaksi': id_trans, 'id_produk': id_produk,
-                                    'jumlah': jumlah, 'total': total,
-                                    'tanggal': waktu, 'tipe': tipe})
-
-                    queue_transaksi.append(transaksi[-1])
-                    simpan_produk(produk)
-                    simpan_transaksi(transaksi)
-                    print(f"Transaksi {tipe} berhasil!")
-                    return
-                print("Produk tidak ditemukan.")
-    except ValueError:
-            print('Input tidak valid. Coba lagi!')
+if __name__ == '__main__':
+    menu()
