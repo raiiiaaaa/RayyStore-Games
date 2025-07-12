@@ -8,3 +8,5 @@ NIM: 24416255201161
 Kelas: IF24D
 
 Prodi: Teknik Informatika
+
+Fakultas: Ilmu Komputer
